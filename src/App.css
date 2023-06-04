@@ -25,6 +25,7 @@ body {
   display: grid;
   place-items: center;
   padding: 1rem;
+  font-family: "Bangers", cursive;
 }
 
 #root {
@@ -65,4 +66,5 @@ body {
   place-items: center;
   background-color: var(--card-name);
   color: white;
+  font-size: 2rem;
 }
