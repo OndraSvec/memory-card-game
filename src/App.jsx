@@ -28,10 +28,10 @@ function App() {
 
   const charElements = characters.map((char) => (
     <Card key={char.id}>
-      <img src={char.images.md} />
+      <img className="cardImage" src={char.images.md} />
     </Card>
   ));
-  return <>{characters && charElements}</>;
+  return <div className="cards-container">{characters && charElements}</div>;
 }
 
 export default App;

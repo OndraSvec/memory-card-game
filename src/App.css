@@ -1,0 +1,59 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --cards-grid-gap: clamp(0.25rem, 5vw, 1rem);
+  --card-border: clamp(2px, 5vw, 10px);
+  --card-border-color-top: #020617;
+  --card-border-color-bottom: #f4f4f5;
+}
+
+html {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  flex-grow: 1;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+}
+
+#root {
+  width: 100%;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--cards-grid-gap);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  max-height: 22rem;
+  border-style: solid;
+  border-width: var(--card-border);
+  border-image: linear-gradient(
+      45deg,
+      var(--card-border-color-bottom),
+      var(--card-border-color-top)
+    )
+    1;
+  padding: calc(var(--card-border) * 0.5);
+  overflow: hidden;
+}
+
+.cardImage {
+  object-fit: cover;
+}
