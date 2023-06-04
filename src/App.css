@@ -11,6 +11,7 @@
   --card-border: clamp(2px, 5vw, 10px);
   --card-border-color-top: #020617;
   --card-border-color-bottom: #f4f4f5;
+  --card-name: #09090b;
 }
 
 html {
@@ -39,9 +40,7 @@ body {
 .card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
-  max-height: 22rem;
   border-style: solid;
   border-width: var(--card-border);
   border-image: linear-gradient(
@@ -55,5 +54,15 @@ body {
 }
 
 .cardImage {
-  object-fit: cover;
+  object-fit: contain;
+  width: 100%;
+}
+
+.cardName {
+  padding: calc(var(--card-border) * 1.5);
+  width: 100%;
+  display: grid;
+  place-items: center;
+  background-color: var(--card-name);
+  color: white;
 }

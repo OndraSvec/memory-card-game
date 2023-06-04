@@ -28,6 +28,9 @@ function App() {
 
   const charElements = characters.map((char) => (
     <Card key={char.id}>
+      <div className="cardName">
+        <p>{char.name}</p>
+      </div>
       <img className="cardImage" src={char.images.md} />
     </Card>
   ));
