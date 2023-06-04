@@ -13,6 +13,13 @@ function App() {
     return data;
   };
 
+  const filterOutCharsWithNoPortrait = (arr) => {
+    const filteredArr = arr.filter(
+      (item) => !item.images.md.includes("no-portrait")
+    );
+    return filteredArr;
+  };
+
   const getTenRandomChar = (arr) => {
     const tenRandomChars = new Set();
     while (tenRandomChars.size < 10) {
@@ -23,7 +30,9 @@ function App() {
   };
 
   useEffect(() => {
-    fetchCharacters().then((data) => getTenRandomChar(data));
+    fetchCharacters().then((data) =>
+      getTenRandomChar(filterOutCharsWithNoPortrait(data))
+    );
   }, []);
 
   const charElements = characters.map((char) => (
