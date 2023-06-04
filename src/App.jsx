@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Card from "./components/Card";
 import "./App.css";
 
 function App() {
@@ -26,7 +27,9 @@ function App() {
   }, []);
 
   const charElements = characters.map((char) => (
-    <img key={char.id} src={char.images.md} />
+    <Card key={char.id}>
+      <img src={char.images.md} />
+    </Card>
   ));
   return <>{characters && charElements}</>;
 }
