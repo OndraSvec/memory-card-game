@@ -55,7 +55,7 @@ body {
 }
 
 .cardImage {
-  object-fit: contain;
+  object-fit: cover;
   width: 100%;
 }
 
