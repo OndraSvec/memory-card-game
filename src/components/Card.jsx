@@ -10,11 +10,18 @@ const Card = ({ children, onClick, cardClicked }) => {
     target.style.setProperty("--card-rotate-x", `${x / 15}deg`);
     target.style.setProperty("--card-rotate-y", `${y / 15}deg`);
   };
+  const handleMouseLeave = (e) => {
+    const { target } = e;
+    target.style.setProperty("--card-rotate-x", "0deg");
+    target.style.setProperty("--card-rotate-y", "0deg");
+  };
+
   return (
     <div
       className={cardClicked ? "card active" : "card"}
       onClick={onClick}
       onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
     >
       <div className="card-inner">
         <div className="card-front">{children}</div>
