@@ -9,6 +9,7 @@ function App() {
   const [error, setError] = useState(null);
   const [cardClicked, setCardClicked] = useState(false);
   const [alreadyClickedCards, setAlreadyClickedCards] = useState([]);
+  const [gameStart, setGameStart] = useState(true);
   const [gameOver, setGameOver] = useState(false);
   const [currentScore, setCurrentScore] = useState(0);
   const [bestScore, setBestScore] = useState(
@@ -47,7 +48,7 @@ function App() {
     fetchCharacters().then((data) =>
       getTenRandomChar(filterOutCharsWithNoPortrait(data))
     );
-  }, []);
+  }, [gameStart]);
 
   useEffect(() => {
     if (alreadyClickedCards.length > 0) {
@@ -68,8 +69,10 @@ function App() {
   }, [gameOver]);
 
   const handleClick = (id) => {
-    if (alreadyClickedCards.includes(id)) setGameOver(true);
-    else {
+    if (alreadyClickedCards.includes(id)) {
+      setGameOver(true);
+      setCardClicked(true);
+    } else {
       setCardClicked(true);
       setAlreadyClickedCards((prevState) => [...prevState, id]);
       setCurrentScore((prevState) => prevState + 1);
@@ -92,7 +95,11 @@ function App() {
     <h1>{error}</h1>
   ) : (
     <>
-      <ScoreBoard currentScore={currentScore} bestScore={bestScore} />
+      {gameOver ? (
+        <p className="gameOver">gameover!!!</p>
+      ) : (
+        <ScoreBoard currentScore={currentScore} bestScore={bestScore} />
+      )}
       <div className="cards-container">{characters && charElements}</div>
     </>
   );
