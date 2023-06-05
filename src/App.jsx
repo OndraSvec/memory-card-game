@@ -8,13 +8,18 @@ function App() {
   const [alreadyClickedCards, setAlreadyClickedCards] = useState([]);
   const [gameOver, setGameOver] = useState(false);
   const [cardClicked, setCardClicked] = useState(false);
+  const [error, setError] = useState(null);
 
   const fetchCharacters = async () => {
-    const response = await fetch(
-      "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json"
-    );
-    const data = await response.json();
-    return data;
+    try {
+      const response = await fetch(
+        "https://cdn.jsdelivr.net/gh/akabab/superhero-api@0.3.0/api/all.json"
+      );
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      setError("There was an error loading the data, try again later.");
+    }
   };
 
   const filterOutCharsWithNoPortrait = (arr) => {
@@ -70,7 +75,11 @@ function App() {
       <img className="cardImage" src={char.images.md} />
     </Card>
   ));
-  return <div className="cards-container">{characters && charElements}</div>;
+  return error ? (
+    <h1>{error}</h1>
+  ) : (
+    <div className="cards-container">{characters && charElements}</div>
+  );
 }
 
 export default App;
