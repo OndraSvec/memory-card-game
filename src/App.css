@@ -55,6 +55,7 @@ body {
   padding: calc(var(--card-border) * 0.5);
   overflow: hidden;
   perspective: 80rem;
+  position: relative;
   cursor: pointer;
 }
 
@@ -65,6 +66,27 @@ body {
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
+}
+
+.card::before {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  content: "";
+  background: radial-gradient(
+    5rem circle at var(--mouse-x) var(--mouse-y),
+    rgb(255, 255, 255) 10%,
+    rgba(255, 255, 255, 0)
+  );
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card.active .card-inner {
