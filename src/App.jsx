@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Card from "./components/Card";
 import ScoreBoard from "./components/ScoreBoard";
 import GameOver from "./components/GameOver";
+import RestartButton from "./components/RestartButton";
 import shuffleArr from "./utils/shuffleArr";
 import "./App.css";
 
@@ -67,6 +68,7 @@ function App() {
       localStorage.setItem("memoryCardGameBestScore", currentScore);
       setBestScore(localStorage.getItem("memoryCardGameBestScore"));
     }
+    setGameStart(false);
   }, [gameOver]);
 
   const handleClick = (id) => {
@@ -78,6 +80,15 @@ function App() {
       setAlreadyClickedCards((prevState) => [...prevState, id]);
       setCurrentScore((prevState) => prevState + 1);
     }
+  };
+
+  const handleRestart = () => {
+    setGameStart(true);
+    setGameOver(false);
+    setCurrentScore(0);
+    setTimeout(() => {
+      setCardClicked(false);
+    }, 800);
   };
 
   const charElements = characters.map((char) => (
@@ -97,7 +108,10 @@ function App() {
   ) : (
     <>
       {gameOver ? (
-        <GameOver />
+        <>
+          <GameOver />
+          <RestartButton onClick={handleRestart} />
+        </>
       ) : (
         <ScoreBoard currentScore={currentScore} bestScore={bestScore} />
       )}

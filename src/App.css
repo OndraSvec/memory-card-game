@@ -132,11 +132,31 @@ body {
   font-size: 2rem;
 }
 
-.scoreBoard > p {
+.scoreBoard > p,
+.restartButton {
   font-size: 2rem;
 }
 
 .gameOver {
   text-align: center;
   font-size: 3rem;
+}
+
+.restartButtonDiv {
+  display: flex;
+  justify-content: center;
+}
+
+.restartButton {
+  font-family: inherit;
+  cursor: pointer;
+  width: 15rem;
+  padding: 0.5rem;
+  border-image: linear-gradient(
+      45deg,
+      var(--card-border-color-bottom),
+      var(--card-border-color-top)
+    )
+    1;
+  background: transparent;
 }
