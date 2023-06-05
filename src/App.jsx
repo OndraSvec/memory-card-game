@@ -1,14 +1,19 @@
 import { useState, useEffect } from "react";
 import Card from "./components/Card";
+import ScoreBoard from "./components/ScoreBoard";
 import shuffleArr from "./utils/shuffleArr";
 import "./App.css";
 
 function App() {
   const [characters, setCharacters] = useState([]);
+  const [error, setError] = useState(null);
+  const [cardClicked, setCardClicked] = useState(false);
   const [alreadyClickedCards, setAlreadyClickedCards] = useState([]);
   const [gameOver, setGameOver] = useState(false);
-  const [cardClicked, setCardClicked] = useState(false);
-  const [error, setError] = useState(null);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [bestScore, setBestScore] = useState(
+    () => localStorage.getItem("memoryCardGameBestScore") || 0
+  );
 
   const fetchCharacters = async () => {
     try {
@@ -55,11 +60,19 @@ function App() {
     }
   }, [alreadyClickedCards]);
 
+  useEffect(() => {
+    if (currentScore > bestScore) {
+      localStorage.setItem("memoryCardGameBestScore", currentScore);
+      setBestScore(localStorage.getItem("memoryCardGameBestScore"));
+    }
+  }, [gameOver]);
+
   const handleClick = (id) => {
     if (alreadyClickedCards.includes(id)) setGameOver(true);
     else {
       setCardClicked(true);
       setAlreadyClickedCards((prevState) => [...prevState, id]);
+      setCurrentScore((prevState) => prevState + 1);
     }
   };
 
@@ -78,7 +91,10 @@ function App() {
   return error ? (
     <h1>{error}</h1>
   ) : (
-    <div className="cards-container">{characters && charElements}</div>
+    <>
+      <ScoreBoard currentScore={currentScore} bestScore={bestScore} />
+      <div className="cards-container">{characters && charElements}</div>
+    </>
   );
 }
 
