@@ -52,6 +52,7 @@ body {
     1;
   padding: calc(var(--card-border) * 0.5);
   overflow: hidden;
+  cursor: pointer;
 }
 
 .cardImage {
