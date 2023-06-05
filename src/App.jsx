@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Card from "./components/Card";
 import ScoreBoard from "./components/ScoreBoard";
+import GameOver from "./components/GameOver";
 import shuffleArr from "./utils/shuffleArr";
 import "./App.css";
 
@@ -96,7 +97,7 @@ function App() {
   ) : (
     <>
       {gameOver ? (
-        <p className="gameOver">gameover!!!</p>
+        <GameOver />
       ) : (
         <ScoreBoard currentScore={currentScore} bestScore={bestScore} />
       )}
