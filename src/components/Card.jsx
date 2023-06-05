@@ -7,6 +7,8 @@ const Card = ({ children, onClick, cardClicked }) => {
 
     target.style.setProperty("--mouse-x", `${x}px`);
     target.style.setProperty("--mouse-y", `${y}px`);
+    target.style.setProperty("--card-rotate-x", `${x / 15}deg`);
+    target.style.setProperty("--card-rotate-y", `${y / 15}deg`);
   };
   return (
     <div

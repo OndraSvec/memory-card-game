@@ -21,6 +21,7 @@ html {
 }
 
 body {
+  background-color: white;
   flex-grow: 1;
   display: grid;
   place-items: center;
@@ -54,8 +55,10 @@ body {
     1;
   padding: calc(var(--card-border) * 0.5);
   overflow: hidden;
-  perspective: 80rem;
   position: relative;
+  perspective: 80rem;
+  transform-style: preserve-3d;
+  transform: rotateX(var(--card-rotate-x)) rotateY(var(--card-rotate-y));
   cursor: pointer;
 }
 
