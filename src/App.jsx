@@ -7,6 +7,7 @@ function App() {
   const [characters, setCharacters] = useState([]);
   const [alreadyClickedCards, setAlreadyClickedCards] = useState([]);
   const [gameOver, setGameOver] = useState(false);
+  const [cardClicked, setCardClicked] = useState(false);
 
   const fetchCharacters = async () => {
     const response = await fetch(
@@ -38,16 +39,31 @@ function App() {
     );
   }, []);
 
+  useEffect(() => {
+    if (alreadyClickedCards.length > 0) {
+      setTimeout(() => {
+        setCharacters(shuffleArr(characters));
+      }, 700);
+      setTimeout(() => {
+        setCardClicked(false);
+      }, 800);
+    }
+  }, [alreadyClickedCards]);
+
   const handleClick = (id) => {
     if (alreadyClickedCards.includes(id)) setGameOver(true);
     else {
+      setCardClicked(true);
       setAlreadyClickedCards((prevState) => [...prevState, id]);
-      setCharacters(shuffleArr(characters));
     }
   };
 
   const charElements = characters.map((char) => (
-    <Card key={char.id} onClick={gameOver ? null : () => handleClick(char.id)}>
+    <Card
+      key={char.id}
+      cardClicked={cardClicked}
+      onClick={gameOver ? null : () => handleClick(char.id)}
+    >
       <div className="cardName">
         <p>{char.name}</p>
       </div>
