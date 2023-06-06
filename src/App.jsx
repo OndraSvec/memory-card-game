@@ -37,9 +37,9 @@ function App() {
     return filteredArr;
   };
 
-  const getTenRandomChar = (arr) => {
+  const getTwentyRandomChars = (arr) => {
     const tenRandomChars = new Set();
-    while (tenRandomChars.size < 10) {
+    while (tenRandomChars.size < 20) {
       const randomInd = Math.floor(Math.random() * arr.length);
       tenRandomChars.add(arr[randomInd]);
     }
@@ -48,18 +48,22 @@ function App() {
 
   useEffect(() => {
     fetchCharacters().then((data) =>
-      getTenRandomChar(filterOutCharsWithNoPortrait(data))
+      getTwentyRandomChars(filterOutCharsWithNoPortrait(data))
     );
   }, [gameStart]);
 
   useEffect(() => {
-    if (alreadyClickedCards.length > 0) {
+    if (alreadyClickedCards.length > 0 && alreadyClickedCards.length < 20) {
       setTimeout(() => {
         setCharacters(shuffleArr(characters));
       }, 700);
       setTimeout(() => {
         setCardClicked(false);
       }, 800);
+    }
+    if (currentScore === 20) {
+      setCardClicked(true);
+      setGameOver(true);
     }
   }, [alreadyClickedCards]);
 
@@ -86,6 +90,7 @@ function App() {
     setGameStart(true);
     setGameOver(false);
     setCurrentScore(0);
+    setAlreadyClickedCards([]);
     setTimeout(() => {
       setCardClicked(false);
     }, 800);
