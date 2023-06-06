@@ -114,7 +114,7 @@ function App() {
     <>
       {gameOver ? (
         <>
-          <GameOver />
+          <GameOver currentScore={currentScore} />
           <RestartButton onClick={handleRestart} />
         </>
       ) : (
