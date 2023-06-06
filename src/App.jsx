@@ -109,7 +109,7 @@ function App() {
     </Card>
   ));
   return error ? (
-    <h1>{error}</h1>
+    <h1 className="error">{error}</h1>
   ) : (
     <>
       {gameOver ? (
